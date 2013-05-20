@@ -1,0 +1,15 @@
+#!/bin/bash
+
+file=$1
+echo "converting $file using rot13"
+extension=${file##*.}
+if [ $extension = "rot13" ]; then
+  extension=""
+  length=${#file}
+  length=`expr $length-6`
+  newfile=${file:0:length}
+else
+  newfile=$file
+  extension=".rot13"
+fi
+cat "$file" | tr a-mA-Mn-zN-Z n-zN-Za-mA-M > "$newfile$extension"
